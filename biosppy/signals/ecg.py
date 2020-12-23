@@ -23,10 +23,10 @@ import scipy.signal as ss
 
 # local
 from . import tools as st
-from .. import plotting, utils
+from .. import utils
 
 
-def ecg(signal=None, sampling_rate=1000., show=True):
+def ecg(signal=None, sampling_rate=1000.):
     """Process a raw ECG signal and extract relevant signal features using
     default parameters.
 
@@ -36,8 +36,7 @@ def ecg(signal=None, sampling_rate=1000., show=True):
         Raw ECG signal.
     sampling_rate : int, float, optional
         Sampling frequency (Hz).
-    show : bool, optional
-        If True, show a summary plot.
+
 
     Returns
     -------
@@ -105,18 +104,7 @@ def ecg(signal=None, sampling_rate=1000., show=True):
     ts_hr = ts[hr_idx]
     ts_tmpl = np.linspace(-0.2, 0.4, templates.shape[1], endpoint=False)
 
-    # plot
-    if show:
-        plotting.plot_ecg(ts=ts,
-                          raw=signal,
-                          filtered=filtered,
-                          rpeaks=rpeaks,
-                          templates_ts=ts_tmpl,
-                          templates=templates,
-                          heart_rate_ts=ts_hr,
-                          heart_rate=hr,
-                          path=None,
-                          show=True)
+
 
     # output
     args = (ts, filtered, rpeaks, ts_tmpl, templates, ts_hr, hr)
